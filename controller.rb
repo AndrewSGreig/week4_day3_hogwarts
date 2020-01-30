@@ -30,7 +30,19 @@ get '/houses/new_house' do
 end
 
 post '/houses/new_houses' do
-  @house = House.new (params) 
+  @house = House.new (params)
   @house.save
   erb(:new_house)
+end
+
+get '/houses/:id' do
+#first grab the house id from url
+p params
+house_id = params[:id]
+#Get house - by calling find on House
+# and by passing in the ID we got from the params
+@house = House.find_by_id(house_id)
+
+#Render the show page for that order
+erb(:show)
 end
